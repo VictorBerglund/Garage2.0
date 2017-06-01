@@ -1,0 +1,53 @@
+﻿@model Garage2._0.Models.Garage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Garage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbrOfWheels)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbrOfWheels)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

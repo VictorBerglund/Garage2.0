@@ -1,0 +1,56 @@
+﻿@model Garage2._0.Models.Garage
+
+@{
+    ViewBag.Title = "Check Out";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to check out?</h3>
+<div>
+    <h4>Garage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbrOfWheels)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbrOfWheels)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Check out" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
