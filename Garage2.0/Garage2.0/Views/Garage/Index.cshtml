@@ -8,7 +8,14 @@
 
 <p>
     @Html.ActionLink("Park", "Park")
+
+   @using (Html.BeginForm("Index", "Garage", FormMethod.Get))
+   {
+        <p> Reg. Number: @Html.TextBox("SearchString") <br />
+         <input name="SearchString" type="submit" value="Search" class="btn btn-default"/></p>
+    }
 </p>
+
 <table class="table">
     <tr>
         <th>
