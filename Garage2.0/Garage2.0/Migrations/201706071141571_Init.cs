@@ -12,10 +12,11 @@ namespace Garage2._0.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        RegNr = c.String(),
+                        RegNr = c.String(maxLength: 6),
                         Vehicle = c.Int(nullable: false),
                         Colour = c.String(),
                         NbrOfWheels = c.Int(nullable: false),
+                        Tid = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

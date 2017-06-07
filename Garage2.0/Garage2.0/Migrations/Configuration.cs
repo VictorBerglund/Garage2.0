@@ -30,10 +30,10 @@ namespace Garage2._0.Migrations
 
             context.Garage.AddOrUpdate(
                 g => new {g.Vehicle, g.RegNr, g.Colour, g.NbrOfWheels},
-                new Garage { Vehicle = Vehicles.Car, RegNr = "123abc", Colour = "Blue", NbrOfWheels = 4, Tid = DateTime.Now },
-                new Garage { Vehicle = Vehicles.Airplane, RegNr = "456def",Colour = "White", NbrOfWheels = 6, Tid = DateTime.Now },
-                new Garage { Vehicle = Vehicles.Boat, RegNr = "789ghi", Colour = "Black", NbrOfWheels = 0, Tid = DateTime.Now },
-                new Garage { Vehicle = Vehicles.Motorcycle, RegNr = "101jkl", Colour = "Red", NbrOfWheels = 2, Tid = DateTime.Now }
+                new Garage { Vehicle = Vehicles.Car, RegNr = "ABC123", Colour = "Blue", NbrOfWheels = 4, Tid = DateTime.Now },
+                new Garage { Vehicle = Vehicles.Airplane, RegNr = "DEF456",Colour = "White", NbrOfWheels = 6, Tid = DateTime.Now },
+                new Garage { Vehicle = Vehicles.Boat, RegNr = "GHI789", Colour = "Black", NbrOfWheels = 0, Tid = DateTime.Now },
+                new Garage { Vehicle = Vehicles.Motorcycle, RegNr = "JKL101", Colour = "Red", NbrOfWheels = 2, Tid = DateTime.Now }
                 );
         }
     }

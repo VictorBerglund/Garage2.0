@@ -13,7 +13,7 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
         public ActionResult Index()
         {
-            return View(db.Garage.ToList());
+            return View(db.Garage);
         }
 
     //public ActionResult About()

@@ -1,21 +1,31 @@
 ﻿@model IEnumerable<Garage2._0.Models.Garage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Garage";
 }
-
-<h2>Index</h2>
-
-<p>
+<script>
+    $(document).fadeOut();
+</script>
+<h2>Garage</h2>
+<div id="alert" class="alert alert-success" role="alert"  >@TempData["park"]</div>
+<div>
     @Html.ActionLink("Park", "Park")
 
    @using (Html.BeginForm("Index", "Garage", FormMethod.Get))
    {
-        <p> Reg. Number: @Html.TextBox("SearchString") <br />
-         <input name="SearchString" type="submit" value="Search" class="btn btn-default"/></p>
-    }
-</p>
-
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="input-group">
+                <input name="searchString" type="text" class="form-control" placeholder="Registration Number..." />
+                <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="Search"/>
+                </span>
+            </div>
+        </div>
+    </div>
+   }
+</div>
+<br />
 <table class="table">
     <tr>
         <th>

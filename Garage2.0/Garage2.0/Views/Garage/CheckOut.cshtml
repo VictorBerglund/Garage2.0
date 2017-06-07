@@ -4,11 +4,10 @@
     ViewBag.Title = "Check Out";
 }
 
-<h2>Delete</h2>
+<h2>Check Out</h2>
 
 <h3>Are you sure you want to check out?</h3>
 <div>
-    <h4>Garage</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -34,15 +33,6 @@
         <dd>
             @Html.DisplayFor(model => model.Colour)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NbrOfWheels)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NbrOfWheels)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
@@ -50,7 +40,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Check out" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to the Garage", "Index")
         </div>
     }
 </div>

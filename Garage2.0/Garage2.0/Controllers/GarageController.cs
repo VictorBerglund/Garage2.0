@@ -8,12 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2._0.DataAccessLayer;
 using Garage2._0.Models;
+using Garage2._0.Utility;
 
 namespace Garage2._0.Controllers
 {
     public class GarageController : Controller
     {
         private GarageContext db = new GarageContext();
+
+        string totTime(TimeSpan t)
+        {
+            return Convert.ToInt32(t.TotalHours).ToString();
+        }
 
         // GET: Garage
         public ActionResult Index(string searchString)
@@ -25,7 +31,7 @@ namespace Garage2._0.Controllers
             return View(garage);
         }
 
-        // GET: Garage/Details/5
+        // GET: Garage/Details/id
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,18 +43,17 @@ namespace Garage2._0.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ParkTime = totTime(DateTime.Now-garage.Tid);
             return View(garage);
         }
 
-        // GET: Garage/Create
+        // GET: Garage/Park
         public ActionResult Park()
         {
             return View();
         }
 
-        // POST: Garage/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Garage/Park
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Park([Bind(Include = "Id,RegNr,Vehicle,Colour,NbrOfWheels,Tid")] Garage garage)
@@ -58,14 +63,14 @@ namespace Garage2._0.Controllers
                 garage.Tid = DateTime.Now;
                 db.Garage.Add(garage);
                 db.SaveChanges();
+                TempData["park"] = "You have successfully park";
                 return RedirectToAction("Index");
             }
-
             return View(garage);
         }
 
 
-        // GET: Garage/Delete/5
+        // GET: Garage/CkeckOut/id
         public ActionResult CheckOut(int? id)
         {
             if (id == null)
@@ -77,18 +82,20 @@ namespace Garage2._0.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(garage);
         }
 
-        // POST: Garage/Delete/5
+        // POST: Garage/CheckOut/id
         [HttpPost, ActionName("CheckOut")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Garage garage = db.Garage.Find(id);
+            var vmKvitto = new KvittoViewModel() { RegNum = garage.RegNr, vehicle = garage.Vehicle, ParkTime = garage.Tid, Price = Convert.ToInt32((DateTime.Now - garage.Tid).TotalHours) * 10, totParkTime = UtilityTime.TimeFix(DateTime.Now-garage.Tid) , CheckOutTime = DateTime.Now.ToString() };
             db.Garage.Remove(garage);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return View("Kvitto",vmKvitto);
         }
 
         protected override void Dispose(bool disposing)
