@@ -9,7 +9,7 @@ namespace Garage2._0.Utility
     {
         static public string TimeFix(TimeSpan t)
         {
-            return String.Format("{0:D2}:{1:D2}:{2:D2}",t.Hours,t.Minutes,t.Seconds);
+            return String.Format("{0:D2}h {1:D2}min {2:D2}sec",t.Hours,t.Minutes,t.Seconds);
         }
     }
 }

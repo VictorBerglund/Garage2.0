@@ -18,7 +18,7 @@ namespace Garage2._0.Controllers
 
         string totTime(TimeSpan t)
         {
-            return Convert.ToInt32(t.TotalHours).ToString();
+            return UtilityTime.TimeFix(t);
         }
 
         // GET: Garage
@@ -43,8 +43,16 @@ namespace Garage2._0.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ParkTime = totTime(DateTime.Now-garage.Tid);
+            ViewBag.ParkTime = totTime(DateTime.Now - garage.Tid); 
             return View(garage);
+        }
+
+        //GET: Garage/Statistics
+        public ActionResult Statistics()
+        {
+            var garage = db.Garage;
+            var vmStats = new StatisticsViewModel() { vehicles = garage, NbrOfWheels = garage.Sum(item => item.NbrOfWheels) };
+            return View("Statistics",vmStats);
         }
 
         // GET: Garage/Park
@@ -63,7 +71,7 @@ namespace Garage2._0.Controllers
                 garage.Tid = DateTime.Now;
                 db.Garage.Add(garage);
                 db.SaveChanges();
-                TempData["park"] = "You have successfully park";
+                TempData["park"] = "You have successfully parked";
                 return RedirectToAction("Index");
             }
             return View(garage);
@@ -92,10 +100,11 @@ namespace Garage2._0.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Garage garage = db.Garage.Find(id);
-            var vmKvitto = new KvittoViewModel() { RegNum = garage.RegNr, vehicle = garage.Vehicle, ParkTime = garage.Tid, Price = Convert.ToInt32((DateTime.Now - garage.Tid).TotalHours) * 10, totParkTime = UtilityTime.TimeFix(DateTime.Now-garage.Tid) , CheckOutTime = DateTime.Now.ToString() };
+            var p = Convert.ToInt32((DateTime.Now - garage.Tid).TotalHours) * 10;
+            var vmKvitto = new KvittoViewModel() { RegNum = garage.RegNr, vehicle = garage.Vehicle, ParkTime = garage.Tid, Price = (DateTime.Now - garage.Tid).TotalHours > 0 ? p : 10, totParkTime = UtilityTime.TimeFix(DateTime.Now - garage.Tid), CheckOutTime = DateTime.Now.ToString() };
             db.Garage.Remove(garage);
             db.SaveChanges();
-            return View("Kvitto",vmKvitto);
+            return View("Kvitto", vmKvitto);
         }
 
         protected override void Dispose(bool disposing)

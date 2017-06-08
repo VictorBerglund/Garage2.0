@@ -22,6 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Garage", "Index", "Garage")</li>
+                    <li>@Html.ActionLink("Statistics","Statistics","Garage")</li>
                 </ul>
             </div>
         </div>
@@ -37,5 +38,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/ParkPopUp.js")
 </body>
 </html>

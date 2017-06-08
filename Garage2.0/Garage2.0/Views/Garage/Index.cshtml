@@ -3,11 +3,10 @@
 @{
     ViewBag.Title = "Garage";
 }
-<script>
-    $(document).fadeOut();
-</script>
+
+<div id="alertBox" class="alert alert-success" role="alert">@TempData["park"]</div>
 <h2>Garage</h2>
-<div id="alert" class="alert alert-success" role="alert"  >@TempData["park"]</div>
+
 <div>
     @Html.ActionLink("Park", "Park")
 
@@ -26,32 +25,35 @@
    }
 </div>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Vehicle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegNr)
-        </th>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegNr)
+            </th>
 
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vehicle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegNr)
-        </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNr)
+                </td>
 
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Check Out", "CheckOut", new { id=item.Id })
-        </td>
-    </tr>
-}
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Check Out", "CheckOut", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
