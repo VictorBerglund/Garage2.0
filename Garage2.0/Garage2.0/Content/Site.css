@@ -25,6 +25,10 @@ textarea {
     max-width: 280px;
 }
 
+#alertBox{
+   display:none;
+}
+
 .jumbotron{
     margin-top: 1rem;
     background-color: #537072;
