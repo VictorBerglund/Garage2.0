@@ -43,15 +43,18 @@ namespace Garage2._0.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ParkTime = totTime(DateTime.Now - garage.Tid); 
+            ViewBag.ParkTime = totTime(DateTime.Now - garage.Tid);
             return View(garage);
         }
 
         //GET: Garage/Statistics
-        public ActionResult Statistics()
+        public ActionResult Statistics(Garage g)
         {
+            
             var garage = db.Garage;
-            var vmStats = new StatisticsViewModel() { vehicles = garage, NbrOfWheels = garage.Sum(item => item.NbrOfWheels) };
+            var totP = Convert.ToInt32(DateTime.Now - g.Tid) * 10;
+            
+            var vmStats = new StatisticsViewModel() { vehicles = garage, NbrOfWheels = garage.Sum(item => item.NbrOfWheels), Price = totP };
             return View("Statistics",vmStats);
         }
 
@@ -101,7 +104,7 @@ namespace Garage2._0.Controllers
         {
             Garage garage = db.Garage.Find(id);
             var p = Convert.ToInt32((DateTime.Now - garage.Tid).TotalHours) * 10;
-            var vmKvitto = new KvittoViewModel() { RegNum = garage.RegNr, vehicle = garage.Vehicle, ParkTime = garage.Tid, Price = (DateTime.Now - garage.Tid).TotalHours > 0 ? p : 10, totParkTime = UtilityTime.TimeFix(DateTime.Now - garage.Tid), CheckOutTime = DateTime.Now.ToString() };
+            var vmKvitto = new KvittoViewModel() { RegNum = garage.RegNr, vehicle = garage.Vehicle, ParkTime = garage.Tid, Price = p < 10 ? 10: p, totParkTime = UtilityTime.TimeFix(DateTime.Now - garage.Tid), CheckOutTime = DateTime.Now.ToString() };
             db.Garage.Remove(garage);
             db.SaveChanges();
             return View("Kvitto", vmKvitto);
